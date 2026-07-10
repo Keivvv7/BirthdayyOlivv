@@ -841,7 +841,6 @@
 
             const flowerMessages = [
               "Bawelnya kamu itu... entah kenapa jadi hal yang paling aku kangenin 🙄💕",
-              <!-- "Katanya ngambek, tapi baru diajak becanda dikit langsung ketawa ngakak. Ketahuan deh 😏", -->
               "Makasih ya udah mau tahan sama tingkah ngga jelas aku. Berat? itu ujiannya 😂",
               "Kalau lagi ngambek, muka kamu lucu banget — tapi jangan sering-sering ya... aku jadi takut 😅",
               "Dari semua orang nyebelin yang pernah aku kenal, kamu yang paling nyebelin... paling aku sayang juga sih 🌸",
@@ -994,19 +993,22 @@
               });
             });
 
-            uploadZone.addEventListener("click", () => fileInput.click());
-            fileInput.addEventListener("change", (e) => {
-              [...e.target.files].forEach((file) => {
-                const url = URL.createObjectURL(file);
-                const img = document.createElement("img");
-                img.src = url;
-                img.addEventListener("click", () => {
-                  lightboxImg.src = url;
-                  lightbox.classList.add("show");
+            if (uploadZone && fileInput) {
+              uploadZone.addEventListener("click", () => fileInput.click());
+              fileInput.addEventListener("change", (e) => {
+                [...e.target.files].forEach((file) => {
+                  const url = URL.createObjectURL(file);
+                  const img = document.createElement("img");
+                  img.src = url;
+                  img.addEventListener("click", () => {
+                    lightboxImg.src = url;
+                    lightbox.classList.add("show");
+                  });
+                  galleryGrid.appendChild(img);
                 });
-                galleryGrid.appendChild(img);
               });
-            });
+            }
+
             document
               .getElementById("closeLb")
               .addEventListener("click", () => lightbox.classList.remove("show"));
